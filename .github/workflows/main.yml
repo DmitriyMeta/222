@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  lint:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install checkers
+        run: sudo apt-get install -y clang-tidy clang-format cppcheck
+
+      - name: Проверка
+        run: .github/lint.sh
+
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install GCC
+        run: sudo apt-get install -y build-essential
+
+      - name: Компиляция
+        run: make clean ; make werror

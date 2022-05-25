@@ -1,0 +1,9 @@
+a.out
+main
+__pycache__
+*.o
+*.d
+*.log
+coverage/
+*.info
+*.gc*
