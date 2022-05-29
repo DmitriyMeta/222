@@ -1,23 +1,21 @@
-#include<stdexcept>
-#include<iostream>
-template <typename T,unsigned N>
-class Vector {
-private:
-    T* t;
+#include <iostream>
+#include <stdexcept>
+template <typename T, unsigned N> class Vector
+{
+  private:
+    T *t;
     unsigned size;
     unsigned capacity;
-public:
-    Vector() : t(nullptr),
-               size(0),
-               capacity(N) {
-        t = new T[N];
-    }
-    void add(T& value) {
+
+  public:
+    Vector() : t(nullptr), size(0), capacity(N) { t = new T[N]; }
+    void add(T &value)
+    {
         if (capacity == size) {
             capacity *= 2;
-            T* p = new T[capacity];
-            for(unsigned i = 0; i < size; ++i) {
-                p[i]=t[i];
+            T *p = new T[capacity];
+            for (unsigned i = 0; i < size; ++i) {
+                p[i] = t[i];
             }
             delete[] t;
             t = p;
@@ -25,12 +23,13 @@ public:
         t[size] = value;
         size++;
     }
-    void pop() {
+    void pop()
+    {
         --size;
-        if (capacity> 2 * size) {
+        if (capacity > 2 * size) {
             capacity = size;
-            T* p = new T[capacity];
-            for(unsigned i = 0;i < size; ++i) {
+            T *p = new T[capacity];
+            for (unsigned i = 0; i < size; ++i) {
                 p[i] = t[i];
             }
             delete[] t;
@@ -38,11 +37,13 @@ public:
         }
     }
 
-    Vector(const Vector& other) : t(new T[other.size]),
-                                  size(other.size),
-                                  capacity(other.size){}
+    Vector(const Vector &other)
+        : t(new T[other.size]), size(other.size), capacity(other.size)
+    {
+    }
 
-    Vector& operator= (const Vector& other) {
+    Vector &operator=(const Vector &other)
+    {
         if (this == &other) {
             return *this;
         }
@@ -50,57 +51,52 @@ public:
         size = other.size;
         capacity = other.size;
         t = new T[size];
-        for(unsigned i = 0;i < size; ++i) {
+        for (unsigned i = 0; i < size; ++i) {
             t[i] = other.t[i];
         }
         return *this;
     }
 
-    unsigned get_size() const {
-        return size;
-    }
+    unsigned get_size() const { return size; }
 
-    int& operator[] (unsigned i) {
-        if(i >= size){
+    int &operator[](unsigned i)
+    {
+        if (i >= size) {
             throw std::runtime_error("error");
         }
         return t[i];
     }
 
-    T *begin () {
-        return t;
-    }
+    T *begin() { return t; }
 
-    T* end () {
-        return t + size;
-    }
+    T *end() { return t + size; }
 
-    Vector(T* begin, T* end): t(nullptr), size(0), capacity(N) {
+    Vector(T *begin, T *end) : t(nullptr), size(0), capacity(N)
+    {
         t = new T[N];
-        for(auto i = begin; i != end; ++i) {
+        for (auto i = begin; i != end; ++i) {
             add(*i);
         }
     }
 
-    ~Vector() {
-        delete[] t;
-    }
+    ~Vector() { delete[] t; }
 };
 
-int main() {
+int main()
+{
     Vector<int, 5> v;
     for (int i = 0; i < 50; ++i) {
         v.add(i);
     }
-    std::cout << 5 << " = " << v[5]<< std::endl;
+    std::cout << 5 << " = " << v[5] << std::endl;
 
-    for(auto it = v.begin(); it != v.end(); ++it){
-        std::cout<< *it <<" ";
+    for (auto it = v.begin(); it != v.end(); ++it) {
+        std::cout << *it << " ";
     }
 
-    Vector<int,7> n(v.begin(), v.end());
-    for(auto& x : n){
-        std::cout<< x << " ";
+    Vector<int, 7> n(v.begin(), v.end());
+    for (auto &x : n) {
+        std::cout << x << " ";
     }
     while (v.get_size() > 0) {
         v.pop();
