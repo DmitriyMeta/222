@@ -18,7 +18,6 @@ int main(int argc, char **argv)
 
     httplib::Server svr;
     // Увеличение времени передачи с клиента
-    //svr.set_read_timeout(60);
     // обработчик для GET запроса по адресу /stop. останавливает сервер.
     svr.Get("/stop", [&](const httplib::Request & /*unused*/,
                          httplib::Response & /*unused*/) { svr.stop(); });
