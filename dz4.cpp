@@ -3,7 +3,9 @@
 
 int main(int argc, char **argv)
 {
-    int port = 8080;
+    const int k = 8080;
+    const int t = 200;
+    int port = k;
     // меняем порт по умолчанию, если предоставлен соответствующий аргумент
     // командной строки
     if (argc >= 2) {
@@ -16,7 +18,7 @@ int main(int argc, char **argv)
 
     httplib::Server svr;
     // Увеличение времени передачи с клиента
-    svr.set_read_timeout(60);
+    //svr.set_read_timeout(60);
     // обработчик для GET запроса по адресу /stop. останавливает сервер.
     svr.Get("/stop", [&](const httplib::Request & /*unused*/,
                          httplib::Response & /*unused*/) { svr.stop(); });
@@ -24,7 +26,7 @@ int main(int argc, char **argv)
     svr.Get("/index",
             [&](const httplib::Request & /*unused*/, httplib::Response &resp) {
                 resp.body = "Hi";
-                resp.status = 200;
+                resp.status = t;
             });
     // возвращает страничку по адресу about
     svr.Get("/about", [&](const httplib::Request & /*unused*/,
@@ -44,7 +46,7 @@ int main(int argc, char **argv)
 </body>
 </html>
 )";
-        resp.status = 200;
+        resp.status = t;
     });
     //запускает сервер на указанном порту. программа не завершится, пока сервер
     //не будет остановлен
