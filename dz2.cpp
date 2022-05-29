@@ -72,10 +72,10 @@ template <unsigned N> class Vector
 
     int *end() { return t + size; }
 
-    Vector(int *begin, int *end) : t(nullptr), size(0), capacity(N)
+    Vector(int *begin, int const *end) : t(nullptr), size(0), capacity(N)
     {
         t = new int[N];
-        for (auto i = begin; i != end; i++) {
+        for (auto *i = begin; i != end; i++) {
             add(*i);
         }
     }
@@ -85,14 +85,5 @@ template <unsigned N> class Vector
 
 int main()
 {
-    Vector<5> v;
-    for (int i = 0; i < 50; ++i) {
-        v.add(i);
-    }
-    std::cout << 5 << " = " << v[5] << std::endl;
-    while (v.get_size() > 0) {
-        v.pop();
-    }
-
     return 0;
 }
