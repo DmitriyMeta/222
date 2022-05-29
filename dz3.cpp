@@ -1,6 +1,6 @@
 #include<stdexcept>
 #include<iostream>
-template <class T,unsigned N = 10>
+template <typename T,unsigned N>
 class Vector {
 private:
     T* t;

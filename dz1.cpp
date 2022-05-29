@@ -1,6 +1,6 @@
 #include<stdexcept>
 #include <iostream>
-template <unsigned N = 10>
+template <unsigned N>
 class Vector {
 private:
     int* t;
