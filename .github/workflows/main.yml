@@ -1,32 +1,32 @@
-name: CI
+#name: CI
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+#on:
+ # push:
+  #  branches: [ master ]
+ # pull_request:
+  #  branches: [ master ]
 
-jobs:
-  lint:
-    runs-on: ubuntu-20.04
+#jobs:
+ # lint:
+  #  runs-on: ubuntu-20.04
 
-    steps:
-      - uses: actions/checkout@v2
+#    steps:
+ #     - uses: actions/checkout@v2
 
-      - name: Install checkers
-        run: sudo apt-get install -y clang-tidy clang-format cppcheck
+  #    - name: Install checkers
+   #     run: sudo apt-get install -y clang-tidy clang-format cppcheck
 
-      - name: Проверка
-        run: .github/lint.sh
+    #  - name: Проверка
+     #   run: .github/lint.sh
 
-  build:
-    runs-on: ubuntu-20.04
+  #build:
+  #  runs-on: ubuntu-20.04
 
-    steps:
-      - uses: actions/checkout@v2
+  #  steps:
+ #     - uses: actions/checkout@v2
+#
+#      - name: Install GCC
+#        run: sudo apt-get install -y build-essential
 
-      - name: Install GCC
-        run: sudo apt-get install -y build-essential
-
-      - name: Компиляция
-        run: make clean ; make werror
+#      - name: Компиляция
+#        run: make clean ; make werror
